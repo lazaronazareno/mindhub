@@ -253,6 +253,7 @@ input[type=radio] {
   background-color: #efecea;
   padding: .5em;
   aspect-ratio: 1/1;
+  appearance: none;
   -webkit-appearance: none;
 }
 
