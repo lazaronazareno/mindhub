@@ -1,0 +1,99 @@
+body {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: cursive;
+  min-height: 100vh;
+  background-color: #efecea;
+}
+
+h1, h2, h3 {
+  margin: 0;
+}
+
+h1 {
+  font-size: 4rem;
+  font-weight: 400;
+  color: #f9c535;
+}
+
+.header-bg {
+  height: 30vh;
+  background-image: url('./assets/design1_image1.jpg');
+  background-size: cover;
+}
+
+.header-title {
+  background-color: #334854;
+  color: white;
+  display: inline-block;
+  width: 100%;
+  position: relative;
+  margin-top: .2rem;
+}
+
+.header-title h2 {
+  font-size: 2rem;
+  text-align: center;
+  padding: .3rem;
+}
+
+.header-title img {
+  width: 10rem;
+  display: inline;
+  position: absolute;
+  right: 10vh;
+  top: -3.5rem;
+}
+
+.nav-aside {
+  display: inline-block;
+  width: 15vw;
+  vertical-align: top;
+  height: 100%;
+  background-color: #334854;
+  padding-top: 2rem;
+}
+
+.nav-aside nav a {
+  display: block;
+  margin: 1rem;
+  margin-top: 0;
+  font-size: 1.5rem;
+  color: #e04462;
+}
+
+.nav-aside .active {
+  text-decoration: none;
+  color: black;
+}
+
+main {
+  height: 22.85rem;
+}
+
+.main-container {
+  display: inline-block;
+  width: 80vw;
+  padding-top: 2rem;
+}
+
+.main-container div {
+  margin-bottom: .5rem;
+  background-color: #e04462;
+  border-radius: 1rem;
+  padding: .2rem 2rem;
+}
+
+.main-container h3 {
+  font-size: 1.5rem;
+}
+
+.main-container span {
+  margin-left: 1rem;
+  font-size: 1.1rem;
+}
+
+.main-container a {
+  color: #334854;
+}
