@@ -1,0 +1,113 @@
+body {
+  font-family: "Helvetica Neue",Helvetica,Arial,sans-serif;
+  line-height: .5rem;
+  margin: 0;
+  padding: 0;
+  text-transform: uppercase;
+  box-sizing: border-box;
+}
+
+nav {
+  padding: .5rem;
+}
+
+.navbar-brand:hover {
+  cursor: pointer;
+}
+
+ul, li {
+  margin: 0!important;
+  padding: 0!important;
+  list-style: none;
+}
+
+ul {
+  flex-basis: 50%;
+}
+
+nav a {
+  color: white!important;
+  font-weight: bold!important;
+}
+
+nav img {
+  height: 35px;
+}
+
+nav > div {
+  flex-basis: 8%;
+}
+
+.nav-link:hover {
+  color: white!important;
+}
+
+.dropdown-menu.show {
+  display: flex!important;
+}
+
+.dropdown-item:focus, .dropdown-item:hover {
+  color: inherit!important;
+  background-color: inherit!important;
+}
+
+.dropdown-divider {
+  background-color: white;
+  height: 1rem!important;
+  width: .5rem!important;
+}
+
+.btn-warning {
+  background-color: #ebe660!important;
+  border-color: #ebe660!important;
+}
+
+.col > h6 {
+  margin-top: .5rem!important;
+}
+
+.footer-social-item {
+  width: 26px;
+  height: 26px;
+}
+
+.face {
+  background-image: url("https://www.cinemarkhoyts.com.ar/images/res/footer-fb.png");
+}
+
+.face:hover {
+  background-image: url("https://www.cinemarkhoyts.com.ar/images/res/footer-fb-white.png");
+}
+
+.insta {
+  background-image: url("https://www.cinemarkhoyts.com.ar/images/res/footer-ins.png");
+}
+
+.insta:hover {
+  background-image: url("https://www.cinemarkhoyts.com.ar/images/res/footer-ins-white.png");
+}
+
+.tw {
+  background-image: url("https://www.cinemarkhoyts.com.ar/images/res/footer-tw.png");
+}
+
+.tw:hover {
+  background-image: url("https://www.cinemarkhoyts.com.ar/images/res/footer-tw-white.png");
+}
+
+.in {
+  background-image: url("https://www.cinemarkhoyts.com.ar/images/res/footer-lnk.png");
+}
+
+.in:hover {
+  background-image: url("https://www.cinemarkhoyts.com.ar/images/res/footer-lnk-white.png");
+}
+
+.tik {
+  background-image: url("https://www.cinemarkhoyts.com.ar/images/res/footer-tkt.png");
+}
+
+.tik:hover {
+  background-image: url("https://www.cinemarkhoyts.com.ar/images/res/footer-tkt-white.png");
+}
+
