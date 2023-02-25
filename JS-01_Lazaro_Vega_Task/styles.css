@@ -14,6 +14,7 @@ body {
   margin: 0;
   padding: 0;
   min-height: 100vh;
+  font-family: 'Roboto', sans-serif;
 }
 
 h1, h2, h3, p {
@@ -68,17 +69,35 @@ h1, h2, h3, p {
   box-shadow: 0 0 0 1px #fff, 0 0 0 0.2rem var(--primary)
 }
 
+.card {
+  box-shadow: -0.5rem 0.5rem 0.5rem 0.2rem rgb(73 80 87 / 70%);
+}
+
 .card a {
   box-shadow: -0.5rem 0.5rem 0.5rem 0.1rem rgb(217 3 104 / 50%);
 }
 
-.card a:hover, .card-img-top:hover {
+.card a:hover, .card:hover {
   transition: 0.2s;
   box-shadow: 0rem 0rem 0rem 0rem rgb(217 3 104 / 50%);
 }
 
+.card a:hover {
+  background-color: var(--primary)!important;
+}
+
+.card:hover img {
+  transition: 0.2s;
+  box-shadow: 0rem 0rem 0rem 0rem rgb(217 3 104 / 50%);
+}
+
+.card:hover {
+  border: 1px solid var(--primary);
+}
+
 .card-img-top {
   height: 20vh;
+  border: 1px solid var(--primary);
   box-shadow: -0.5rem 0.5rem 0.5rem 0.2rem rgb(217 3 104 / 50%);
 }
 
