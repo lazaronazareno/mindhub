@@ -46,7 +46,7 @@
         <h1 class="text-white">Contact us</h1>
         <a href="./stats.html" class="btn btn-danger p-0 px-1"><span class="fs-1">&rarr;</span></a>
       </section>
-      <section class="d-flex flex-column py-4 flex-grow-1">
+      <div class="d-flex flex-column py-4 flex-grow-1">
         <form class="d-flex flex-column align-items-center container-sm gap-1">
           <div class="form-floating mb-3 w-100">
             <input type="email" class="form-control" id="name" placeholder="Name">
@@ -57,12 +57,13 @@
             <label for="email">Email address</label>
           </div>
           <div class=" form-floating w-100">
-            <textarea class="form-control h-75" name="message" placeholder="Leave a message here" rows="8"></textarea>
+            <textarea class="form-control h-75" id="message" name="message" placeholder="Leave a message here"
+              rows="8"></textarea>
             <label for="message">Message</label>
           </div>
           <button class="btn btn-lg btn-danger align-self-end">Submit</button>
         </form>
-      </section>
+      </div>
       <footer class="d-flex justify-content-between align-items-center bg-danger p-3">
         <nav class="d-flex gap-2">
           <a href="#" style="width: 3rem; height: 3rem;"
