@@ -71,6 +71,7 @@ h1, h2, h3, p {
 
 .card {
   box-shadow: -0.5rem 0.5rem 0.5rem 0.2rem rgb(73 80 87 / 70%);
+  min-height: 25rem;
 }
 
 .card a {
