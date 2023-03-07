@@ -1,0 +1,121 @@
+:root {
+  --primary: #d90368;
+  --primary-dark: #b70452;
+  --secondary: #714d9f;
+  --secondary-dark: #2a0054;
+  --tertiary: #006874;
+  --tertiary-dark: #001f24;
+  --error: #ba1a1a;
+  --background-light: #ffffff;
+  --background-dark: #333333;
+}
+
+body {
+  margin: 0;
+  padding: 0;
+  min-height: 100vh;
+  font-family: 'Roboto', sans-serif;
+}
+
+h1, h2, h3, p {
+  margin: 0;
+}
+
+.bg-white {
+  background-color: var(--background-light)!important;
+}
+
+.bg-dark {
+  background-color: var(--background-dark)!important;
+}
+
+.bg-secondary {
+  background-color: var(--secondary)!important;
+}
+
+.bg-danger {
+  background-color: var(--primary)!important;
+}
+
+.btn-danger {
+  background-color: var(--primary)!important;
+  border-color: var(--primary)!important;
+}
+
+.btn-outline-danger {
+  border-color: var(--primary)!important;
+}
+
+.btn-danger:hover {
+  background-color: var(--primary-dark)!important;
+  border-color: var(--primary-dark)!important;
+}
+
+.btn-outline-danger:hover {
+  background-color: var(--primary)!important;
+  border-color: var(--primary)!important;
+}
+
+.border-danger {
+  border-color: var(--primary)!important;
+}
+
+.form-check-input:checked {
+  background-color: var(--primary)!important;
+  border-color: var(--primary)!important;
+}
+
+.form-check-input:focus {
+  box-shadow: 0 0 0 1px #fff, 0 0 0 0.2rem var(--primary)
+}
+
+.card {
+  box-shadow: -0.5rem 0.5rem 0.5rem 0.2rem rgb(73 80 87 / 70%);
+}
+
+.card a {
+  box-shadow: -0.5rem 0.5rem 0.5rem 0.1rem rgb(217 3 104 / 50%);
+}
+
+.card a:hover, .card:hover {
+  transition: 0.2s;
+  box-shadow: 0rem 0rem 0rem 0rem rgb(217 3 104 / 50%);
+}
+
+.card a:hover {
+  background-color: var(--primary)!important;
+}
+
+.card:hover img {
+  transition: 0.2s;
+  box-shadow: 0rem 0rem 0rem 0rem rgb(217 3 104 / 50%);
+}
+
+.card:hover {
+  border: 1px solid var(--primary);
+}
+
+.card-img-top {
+  height: 20vh;
+  border: 1px solid var(--primary);
+  box-shadow: -0.5rem 0.5rem 0.5rem 0.2rem rgb(217 3 104 / 50%);
+}
+
+.form-control:focus {
+  border-color: var(--primary)!important;
+  box-shadow: none;
+}
+
+.form-floating>.form-control:focus~label {
+  color: var(--primary);
+}
+
+#details img {
+  box-shadow: -0.5rem -0.5rem 3rem .5rem rgb(217 3 104 / 50%);
+}
+
+@media (max-width : 786px) {
+  header nav {
+    width: 100%;
+  }
+}
