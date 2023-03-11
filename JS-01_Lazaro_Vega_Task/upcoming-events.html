@@ -48,41 +48,17 @@
         <a href="./past-events.html" class="btn btn-danger p-0 px-1"><span class="fs-1">&rarr;</span></a>
       </section>
       <section class="d-flex flex-column py-4 flex-grow-1">
-        <form class="d-flex flex-wrap align-items-center px-3">
-          <div class="form-check form-check-inline mb-0">
-            <input class="form-check-input" type="checkbox" id="inlineCheckbox1" value="1">
-            <label class="form-check-label" for="inlineCheckbox1">Food Fair</label>
+        <div class="d-flex flex-wrap px-3">
+          <!-- CHECKBOXES -->
+          <div class="d-flex flex-wrap align-items-center gap-2 me-2" id="checkbox-container">
           </div>
-          <div class="form-check form-check-inline mb-0">
-            <input class="form-check-input" type="checkbox" id="inlineCheckbox2" value="2">
-            <label class="form-check-label" for="inlineCheckbox2">Museum</label>
-          </div>
-          <div class="form-check form-check-inline mb-0">
-            <input class="form-check-input" type="checkbox" id="inlineCheckbox3" value="3">
-            <label class="form-check-label" for="inlineCheckbox3">Costume Party</label>
-          </div>
-          <div class="form-check form-check-inline mb-0">
-            <input class="form-check-input" type="checkbox" id="inlineCheckbox4" value="4">
-            <label class="form-check-label" for="inlineCheckbox4">Music Concert</label>
-          </div>
-          <div class="form-check form-check-inline mb-0">
-            <input class="form-check-input" type="checkbox" id="inlineCheckbox5" value="5">
-            <label class="form-check-label" for="inlineCheckbox5">Race</label>
-          </div>
-          <div class="form-check form-check-inline mb-0">
-            <input class="form-check-input" type="checkbox" id="inlineCheckbox6" value="6">
-            <label class="form-check-label" for="inlineCheckbox6">Book Exchange</label>
-          </div>
-          <div class="form-check form-check-inline mb-0">
-            <input class="form-check-input" type="checkbox" id="inlineCheckbox7" value="7">
-            <label class="form-check-label" for="inlineCheckbox7">Cinema</label>
-          </div>
-          <div class="input-group d-flex flex-grow-1 w-25">
-            <input type="text" class="form-control" id="inputGroupFile1" aria-describedby="inputGroup1"
+          <form class="input-group d-flex flex-grow-1 w-25" id="search-form">
+            <input type="text" class="form-control" id="inputGroupFile1" aria-describedby="search-button"
               aria-label="Search">
-            <button class="btn btn-outline-danger" type="button" id="inputGroup1">Search</button>
-          </div>
-        </form>
+            <button class="btn btn-outline-danger" type="submit">Search</button>
+          </form>
+        </div>
+        <!-- CARDS -->
         <div class="row row-cols-1 row-cols-lg-4 row-cols-md-2 g-4 m-0" id="card-container">
         </div>
       </section>
