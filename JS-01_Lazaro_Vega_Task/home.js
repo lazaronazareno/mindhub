@@ -86,7 +86,7 @@ checkbox.addEventListener('change', (e) => {
 function search(word) {
   let results = []
   results = data.events.filter((item) => {
-    return item.name.toLowerCase().includes(word);
+    return item.name.toLowerCase().includes(word.toLowerCase());
   })  
 
   return results
