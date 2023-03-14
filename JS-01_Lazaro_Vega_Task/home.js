@@ -6,7 +6,7 @@ function paintCardCointainer(events) {
 
   for( const event of events){
     template += `
-      <div class="col">
+      <div class="d-flex col justify-content-center">
         <div class="card bg-dark text-white p-3">
           <img src=${event.image} class="card-img-top rounded" alt="...">
           <div class="card-body text-center p-0 py-3">
@@ -15,7 +15,7 @@ function paintCardCointainer(events) {
           </div>
           <div class="d-flex justify-content-between align-items-center p-2">
             <span>Price $${event.price}</span>
-            <a href="./event-details.html" class="btn btn-danger">View More...</a>
+            <a href="./event-details.html?id=${event._id}" class="btn btn-danger">View More...</a>
           </div>
         </div>
       </div>
