@@ -1,16 +1,40 @@
 const querySearch = window.location.search
 
-console.log(querySearch);
-
 const param = new URLSearchParams(querySearch).get("id")
 
-console.log(param);
+let data 
+let apiUrl = 'https://mindhub-xj03.onrender.com/api/amazing'
+let jsonUrl = './data.json'
+
+async function getData() {
+  try {
+    const response = await fetch(apiUrl);
+    if (!response.ok) {
+      throw new Error('Request failed');
+    }
+    data = await response.json();
+    getEventById(param)
+    return data;
+  } catch (error) {
+    console.error(error);
+    try {
+      const response = await fetch(jsonUrl);
+      if (!response.ok) {
+        throw new Error('Request failed');
+      }
+      data = await response.json();
+      getEventById(param)
+      return data;
+    } catch {
+      console.error(error);
+    }
+  }
+}
+getData()
 
 function getEventById(id) {
   let detailsContainer = document.getElementById("details")
-
   const event = data.events.find(event => event._id == id)
-  console.log(event)
 
   let template = ""
 
@@ -48,5 +72,3 @@ function getEventById(id) {
 
   detailsContainer.innerHTML = template
 }
-
-getEventById(param)

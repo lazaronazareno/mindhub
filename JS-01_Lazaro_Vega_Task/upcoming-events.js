@@ -1,8 +1,45 @@
+let data 
+let error
+let apiUrl = 'https://mindhub-xj03.onrender.com/api/amazing'
+let jsonUrl = './data.json'
+
+async function getData() {
+  try {
+    const response = await fetch(apiUrl);
+    if (!response.ok) {
+      throw new Error('Request failed');
+    }
+    data = await response.json();
+    getNewEvents()
+    paintCardCointainer(newEvents)
+    addCategories()
+    return data;
+  } catch (error) {
+    console.error(error);
+    try {
+      const response = await fetch(jsonUrl);
+      if (!response.ok) {
+        throw new Error('Request failed');
+      }
+      data = await response.json();
+      getNewEvents()
+      paintCardCointainer(newEvents)
+      addCategories()
+      return data;
+    } catch {
+      console.error(error);
+    }
+  }
+}
+getData()
+
 const newEvents = []
 
-for (const event of data.events) {
-  if (new Date(Date.parse(data.currentDate)) < new Date(Date.parse(event.date))) {
-    newEvents.push(event)
+function getNewEvents() {
+  for (const event of data.events) {
+    if (new Date(Date.parse(data.currentDate)) < new Date(Date.parse(event.date))) {
+      newEvents.push(event)
+    }
   }
 }
 
@@ -29,8 +66,6 @@ function paintCardCointainer(events) {
   }
   cardContainer.innerHTML = template
 }
-
-paintCardCointainer(newEvents)
 
 function addCategories() {
   let categories = []
@@ -59,8 +94,6 @@ function addCategories() {
   })
   checkboxContainer.innerHTML = template
 }
-
-addCategories()
 
 function searchByCategories(category) {
   let results = []

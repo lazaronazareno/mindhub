@@ -58,14 +58,14 @@
           </thead>
           <tbody class="table-group-divider">
             <tr class="table-secondary">
-              <th class="w-25">Events with highest percentage of attendance</th>
-              <td class="w-25">Events with the lowest percentage of attendance</td>
+              <th class="w-25">Event with highest percentage of attendance</th>
+              <td class="w-25">Event with the lowest percentage of attendance</td>
               <td class="w-25">Event with larger capacity</td>
             </tr>
             <tr>
-              <th>0</th>
-              <td>0</td>
-              <td>0</td>
+              <th id="highestPercentage">Cargando...</th>
+              <td id="lowestPercentage">Cargando...</td>
+              <td id="largerCapacity">Cargando...</td>
             </tr>
           </tbody>
         </table>
@@ -75,21 +75,17 @@
               <th scope="col" colspan="3">Upcoming Events statistics by category</th>
             </tr>
           </thead>
-          <tbody class="table-group-divider">
+          <tbody class="table-group-divider" id="upcoming-events-category">
+            <!---------------- UPCOMING EVENTS TABLE ---------------->
             <tr class="table-secondary">
               <td class="w-25">Categories</td>
               <td class="w-25">Revenues</td>
               <td class="w-25">Percentage of attendance</td>
             </tr>
             <tr>
-              <td>0</td>
-              <td>0</td>
-              <td>0</td>
-            </tr>
-            <tr>
-              <td>0</td>
-              <td>0</td>
-              <td>0</td>
+              <th>Cargando...</th>
+              <td>Cargando...</td>
+              <td>Cargando...</td>
             </tr>
           </tbody>
         </table>
@@ -99,21 +95,17 @@
               <th scope="col" colspan="3">Past Events statistics by category</th>
             </tr>
           </thead>
-          <tbody class="table-group-divider">
+          <tbody class="table-group-divider" id="past-events-category">
+            <!---------------- PAST EVENTS TABLE ---------------->
             <tr class="table-secondary">
               <td class="w-25">Categories</td>
               <td class="w-25">Revenues</td>
               <td class="w-25">Percentage of attendance</td>
             </tr>
             <tr>
-              <td>0</td>
-              <td>0</td>
-              <td>0</td>
-            </tr>
-            <tr>
-              <td>0</td>
-              <td>0</td>
-              <td>0</td>
+              <th>Cargando...</th>
+              <td>Cargando...</td>
+              <td>Cargando...</td>
             </tr>
           </tbody>
         </table>
@@ -140,6 +132,7 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"
       integrity="sha384-w76AqPfDkMBDXo30jS1Sgez6pr3x5MlQ1ZAGC+nuZB+EYdgRZgiwxhTBTkF7CXvN"
       crossorigin="anonymous"></script>
+    <script src="./stats.js"></script>
   </body>
 
 </html>

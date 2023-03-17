@@ -1,10 +1,48 @@
-const pastEvents = []
+let data 
+let error
+let apiUrl = 'https://mindhub-xj03.onrender.com/api/amazing'
+let jsonUrl = './data.json'
 
-for (const event of data.events) {
-  if (new Date(Date.parse(data.currentDate)) > new Date(Date.parse(event.date))) {
-    pastEvents.push(event)
+async function getData() {
+  try {
+    const response = await fetch(apiUrl);
+    if (!response.ok) {
+      throw new Error('Request failed');
+    }
+    data = await response.json();
+    getPastEvents()
+    paintCardCointainer(pastEvents)
+    addCategories()
+    return data;
+  } catch (error) {
+    console.error(error);
+    try {
+      const response = await fetch(jsonUrl);
+      if (!response.ok) {
+        throw new Error('Request failed');
+      }
+      data = await response.json();
+      getPastEvents()
+      paintCardCointainer(pastEvents)
+      addCategories()
+      return data;
+    } catch {
+      console.error(error);
+    }
   }
 }
+getData()
+
+const pastEvents = []
+
+function getPastEvents() {
+  for (const event of data.events) {
+    if (new Date(Date.parse(data.currentDate)) > new Date(Date.parse(event.date))) {
+      pastEvents.push(event)
+    }
+  }
+}
+
 
 function paintCardCointainer(events) {
   let template = ""
@@ -29,8 +67,6 @@ function paintCardCointainer(events) {
   }
   cardContainer.innerHTML = template
 }
-
-paintCardCointainer(pastEvents)
 
 function addCategories() {
   let categories = []
@@ -59,8 +95,6 @@ function addCategories() {
   })
   checkboxContainer.innerHTML = template
 }
-
-addCategories()
 
 function searchByCategories(category) {
   let results = []
