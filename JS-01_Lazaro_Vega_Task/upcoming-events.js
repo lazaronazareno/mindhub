@@ -1,5 +1,4 @@
 let data 
-let error
 let apiUrl = 'https://mindhub-xj03.onrender.com/api/amazing'
 let jsonUrl = './data.json'
 
