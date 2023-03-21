@@ -69,9 +69,10 @@ h1, h2, h3, p {
   box-shadow: 0 0 0 1px #fff, 0 0 0 0.2rem var(--primary)
 }
 
-.card {
+#card-container .card {
   box-shadow: -0.5rem 0.5rem 0.5rem 0.2rem rgb(73 80 87 / 70%);
   min-height: 25rem;
+  max-width: 20rem;
 }
 
 .card a {
@@ -111,9 +112,9 @@ h1, h2, h3, p {
   color: var(--primary);
 }
 
-#details img {
+/* #details img {
   box-shadow: -0.5rem -0.5rem 3rem .5rem rgb(217 3 104 / 50%);
-}
+} */
 
 @media (max-width : 786px) {
   header nav {
