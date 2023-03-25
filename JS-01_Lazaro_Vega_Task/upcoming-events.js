@@ -146,13 +146,14 @@ searchButton.addEventListener('submit', (e) => {
     `
     searchButton[0].value = ''
     cardContainer.innerHTML = notResults
-  
+    
     let backButton = document.getElementById("back-button")
-  
+    
     backButton.addEventListener('click', () => {
       paintCardCointainer(newEvents)
     })
   } else {
+    searchButton[0].value = ''
     paintCardCointainer(results)
   }
 })
