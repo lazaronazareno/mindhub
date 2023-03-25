@@ -1,3 +1,5 @@
+let cardContainer = document.getElementById("card-container")
+
 let data 
 let apiUrl = 'https://mindhub-xj03.onrender.com/api/amazing'
 let jsonUrl = './data.json'
@@ -44,7 +46,6 @@ function getNewEvents() {
 
 function paintCardCointainer(events) {
   let template = ""
-  let cardContainer = document.getElementById("card-container")
 
   for( const event of events){
     template += `
@@ -120,10 +121,10 @@ checkbox.addEventListener('change', (e) => {
 })
 
 // -------------------- SEARCH --------------------
-function search(word) {
+function search(word, data) {
   let results = []
-  results = newEvents.filter((item) => {
-    return item.name.toLowerCase().includes(word);
+  results = data.filter((item) => {
+    return item.name.toLowerCase().includes(word.toLowerCase());
   })  
 
   return results
@@ -134,7 +135,7 @@ let searchButton = document.getElementById("search-form")
 searchButton.addEventListener('submit', (e) => {
   e.preventDefault()
 
-  let results = search(e.target[0].value)
+  let results = categoriesCheckbox.length > 0 ? search(e.target[0].value, categoriesCheckbox) : search(e.target[0].value, newEvents)
 
   if (results.length === 0) {
     let notResults = `
@@ -143,12 +144,12 @@ searchButton.addEventListener('submit', (e) => {
       <button class="btn btn-outline-danger" type="button" id="back-button">Volver</button>
     </div>
     `
+    searchButton[0].value = ''
     cardContainer.innerHTML = notResults
   
     let backButton = document.getElementById("back-button")
   
     backButton.addEventListener('click', () => {
-      searchButton[0].value = ''
       paintCardCointainer(newEvents)
     })
   } else {

@@ -71,8 +71,16 @@ h1, h2, h3, p {
 
 #card-container .card {
   box-shadow: -0.5rem 0.5rem 0.5rem 0.2rem rgb(73 80 87 / 70%);
+}
+
+#card-container .card, #details .card {
   min-height: 25rem;
   max-width: 20rem;
+}
+
+#details .card {
+  max-width: 25rem;
+  border: 5px solid var(--primary);
 }
 
 .card a {

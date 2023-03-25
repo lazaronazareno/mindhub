@@ -112,21 +112,21 @@ checkbox.addEventListener('change', (e) => {
 })
 
 // -------------------- SEARCH --------------------
-function search(word) {
+function search(word, data) {
   let results = []
-  results = data.events.filter((item) => {
+  results = data.filter((item) => {
     return item.name.toLowerCase().includes(word.toLowerCase());
   })  
 
   return results
 }
 
-let searchButton = document.getElementById("search-form")
+let searchForm = document.getElementById("search-form")
 
-searchButton.addEventListener('submit', (e) => {
+searchForm.addEventListener('submit', (e) => {
   e.preventDefault()
 
-  let results = search(e.target[0].value)
+  let results = categoriesCheckbox.length > 0 ? search(e.target[0].value, categoriesCheckbox) : search(e.target[0].value, data.events)
 
   if (results.length === 0) {
     let notResults = `
@@ -135,16 +135,16 @@ searchButton.addEventListener('submit', (e) => {
       <button class="btn btn-outline-danger" type="button" id="back-button">Volver</button>
     </div>
     `
+    searchForm[0].value = ''
     cardContainer.innerHTML = notResults
   
     let backButton = document.getElementById("back-button")
   
     backButton.addEventListener('click', () => {
-      searchButton[0].value = ''
       paintCardCointainer(data.events)
     })
   } else {
+    searchForm[0].value = ''
     paintCardCointainer(results)
   }
 })
-
