@@ -17,7 +17,7 @@
   </head>
 
   <body>
-    <main class="d-flex flex-column vh-100">
+    <main class="d-flex flex-column vh-100" id="App">
       <header
         class="container-fluid bg-dark text-white d-flex flex-column flex-md-row justify-content-between align-items-center px-0 px-sm-2 py-1 border-bottom border-danger">
         <a href="./index.html">
@@ -53,9 +53,15 @@
         <div class="d-flex flex-wrap px-3">
           <!-- CHECKBOXES -->
           <div class="d-flex flex-wrap align-items-center gap-2 me-2" id="checkbox-container">
+            <div v-for="item of categories" class="form-check form-check-inline m-0">
+              <input class="form-check-input" type="checkbox" :id="`inlineCheckbox${item}`" :value=item
+                v-model="categoriesSelected">
+              <label class="form-check-label" :for="`inlineCheckbox${item}`">{{item}}</label>
+            </div>
           </div>
-          <form class="input-group d-flex flex-grow-1 w-25" id="search-form">
-            <input type="text" class="form-control" id="search-input" aria-describedby="search-button"
+          {{searchFilter}}
+          <form class="input-group d-flex flex-grow-1 w-25" id="search-form" @submit.prevent>
+            <input type="text" class="form-control" v-model="word" id="search-input" aria-describedby="search-button"
               aria-label="Search">
             <button class="btn btn-outline-danger" type="submit">Search</button>
           </form>
@@ -63,8 +69,27 @@
         <!-- CARDS -->
         <div class="row row-cols-1 row-cols-lg-4 row-cols-md-2 g-4 m-0 justify-content-center text-center"
           id="card-container">
-          <div class="spinner-border text-danger" role="status">
+          <div v-if="loading && !word" class="spinner-border text-danger" role="status">
             <span class="visually-hidden">Loading...</span>
+          </div>
+          <p v-if="error" class="fs-1 text-danger" role="status">{{error}}</p>
+          <div v-if="word && !events.length" class="d-flex flex-column align-items-center gap-2 w-100">
+            <h2>No hay resultados para la busqueda : {{word}}</h2>
+            <button class="btn btn-outline-danger" type="button" id="back-button"
+              @click="this.word = ''">Volver</button>
+          </div>
+          <div v-for="event of events" class="d-flex col justify-content-center">
+            <div class="card bg-dark text-white p-3">
+              <img :src=event.image class="card-img-top rounded" alt="...">
+              <div class="card-body text-center p-0 py-3">
+                <h5 class="card-title">{{event.name}}</h5>
+                <h6 class="card-subtitle mb-2 text-white">{{event.description}}</h6>
+              </div>
+              <div class="d-flex justify-content-between align-items-center p-2">
+                <span>Price ${{event.price}}</span>
+                <a :href="`./event-details.html?id=${event._id}`" class="btn btn-danger">View More...</a>
+              </div>
+            </div>
           </div>
         </div>
       </section>
@@ -90,7 +115,8 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"
       integrity="sha384-w76AqPfDkMBDXo30jS1Sgez6pr3x5MlQ1ZAGC+nuZB+EYdgRZgiwxhTBTkF7CXvN"
       crossorigin="anonymous"></script>
-    <script src="./past-events.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/vue@3"></script>
+    <script src="./home.js"></script>
   </body>
 
 </html>

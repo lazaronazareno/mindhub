@@ -60,6 +60,9 @@
             </div>
           </div>
           {{searchFilter}}
+          {{getHighestAttendanceEvent}}
+          {{getLowestAttendanceEvent}}
+          {{getLargerCapacityEvent}}
           <form class="input-group d-flex flex-grow-1 w-25" id="search-form" @submit.prevent>
             <input type="text" class="form-control" v-model="word" id="search-input" aria-describedby="search-button"
               aria-label="Search">
