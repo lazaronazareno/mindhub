@@ -122,6 +122,29 @@ function search(word, data) {
 }
 
 let searchForm = document.getElementById("search-form")
+let searchInput = document.getElementById("search-input")
+
+searchInput.addEventListener('input', (e) => {
+  let results = categoriesCheckbox.length > 0 ? search(e.target.value, categoriesCheckbox) : search(e.target.value, data.events)
+
+  if (results.length === 0) {
+    let notResults = `
+    <div class="d-flex flex-column align-items-center gap-2 w-100">
+      <h2>No hay resultados para la busqueda : ${e.target.value}</h2>
+      <button class="btn btn-outline-danger" type="button" id="back-button">Volver</button>
+    </div>
+    `
+    cardContainer.innerHTML = notResults
+  
+    let backButton = document.getElementById("back-button")
+  
+    backButton.addEventListener('click', () => {
+      paintCardCointainer(data.events)
+    })
+  } else {
+    paintCardCointainer(results)
+  }
+})
 
 searchForm.addEventListener('submit', (e) => {
   e.preventDefault()

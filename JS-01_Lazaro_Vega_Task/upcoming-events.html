@@ -55,7 +55,7 @@
           <div class="d-flex flex-wrap align-items-center gap-2 me-2" id="checkbox-container">
           </div>
           <form class="input-group d-flex flex-grow-1 w-25" id="search-form">
-            <input type="text" class="form-control" id="inputGroupFile1" aria-describedby="search-button"
+            <input type="text" class="form-control" id="search-input" aria-describedby="search-button"
               aria-label="Search">
             <button class="btn btn-outline-danger" type="submit">Search</button>
           </form>
@@ -63,7 +63,9 @@
         <!-- CARDS -->
         <div class="row row-cols-1 row-cols-lg-4 row-cols-md-2 g-4 m-0 justify-content-center text-center"
           id="card-container">
-          <h2>Loading...</h2>
+          <div class="spinner-border text-danger" role="status">
+            <span class="visually-hidden">Loading...</span>
+          </div>
         </div>
       </section>
       <footer class="d-flex justify-content-between align-items-center bg-danger p-3">

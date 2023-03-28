@@ -131,9 +131,10 @@ function search(word, data) {
   return results
 }
 
-let searchButton = document.getElementById("search-form")
+let searchForm = document.getElementById("search-form")
+let searchInput = document.getElementById("search-input")
 
-searchButton.addEventListener('submit', (e) => {
+searchForm.addEventListener('submit', (e) => {
   e.preventDefault()
 
   let results = categoriesCheckbox.length > 0 ? search(e.target[0].value, categoriesCheckbox) : search(e.target[0].value, pastEvents)
@@ -145,7 +146,7 @@ searchButton.addEventListener('submit', (e) => {
       <button class="btn btn-outline-danger" type="button" id="back-button">Volver</button>
     </div>
     `
-    searchButton[0].value = ''
+    searchForm[0].value = ''
     cardContainer.innerHTML = notResults
     
     let backButton = document.getElementById("back-button")
@@ -154,7 +155,29 @@ searchButton.addEventListener('submit', (e) => {
       paintCardCointainer(pastEvents)
     })
   } else {
-    searchButton[0].value = ''
+    searchForm[0].value = ''
+    paintCardCointainer(results)
+  }
+})
+
+searchInput.addEventListener('input', (e) => {
+  let results = categoriesCheckbox.length > 0 ? search(e.target.value, categoriesCheckbox) : search(e.target.value, pastEvents)
+
+  if (results.length === 0) {
+    let notResults = `
+    <div class="d-flex flex-column align-items-center gap-2 w-100">
+      <h2>No hay resultados para la busqueda : ${e.target.value}</h2>
+      <button class="btn btn-outline-danger" type="button" id="back-button">Volver</button>
+    </div>
+    `
+    cardContainer.innerHTML = notResults
+  
+    let backButton = document.getElementById("back-button")
+  
+    backButton.addEventListener('click', () => {
+      paintCardCointainer(pastEvents)
+    })
+  } else {
     paintCardCointainer(results)
   }
 })
