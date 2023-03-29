@@ -22,7 +22,14 @@ const app = createApp({
       pastEventStats: [],
       upcomingEventStats: [],
       id: 0,
-      eventDetails: []
+      eventDetails: [],
+      formValues: {
+        name: '',
+        email: '',
+        message: ''
+      },
+      formSubmitted: false,
+      favourites : []
     }
   },
   created() {
@@ -35,6 +42,7 @@ const app = createApp({
       this.typeEvents = 'upcoming'
     }
     this.getData()
+    this.favourites = JSON.parse(localStorage.getItem('favs')) || []
   },
   mounted() {
   },
@@ -72,6 +80,7 @@ const app = createApp({
             .then(data => {
               this.data = data.events
               this.currentDate = data.currentDate
+              this.error = ''
               if (this.typeEvents === 'past') {
                 let pastEvents = this.data.filter(event => new Date(Date.parse(this.currentDate)) > new Date(Date.parse(event.date)))
                 this.data = pastEvents
@@ -99,6 +108,25 @@ const app = createApp({
     },
     getDetails() {
       this.eventDetails = this.data.find(event => event._id === Number(this.id))
+    },
+    handleFormSubmit() {
+      console.log(this.formValues)
+      this.formSubmitted = true
+      setTimeout(() => this.formSubmitted = false, 2000)
+    },
+    addFavourite(event) {
+      console.log(event)
+      console.log(this.eventDetails)
+      console.log(this.favourites)
+      console.log(!this.favourites.some(e => e.name === event.name))
+      if(!this.favourites.some(e => e.name === event.name)){
+        this.favourites.push(event)
+        localStorage.setItem('favs',JSON.stringify(this.favourites))
+      }
+    },
+    deleteFavourite(event){
+      this.favourites = this.favourites.filter(favEvent => favEvent.name !== event.name)
+      localStorage.setItem('favs',JSON.stringify(this.favourites))
     }
   },
   computed:{

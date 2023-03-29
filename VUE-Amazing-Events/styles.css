@@ -111,18 +111,14 @@ h1, h2, h3, p {
 
 .card:hover img {
   transition: 0.2s;
-  box-shadow: 0rem 0rem 0rem 0rem rgb(217 3 104 / 50%);
-}
-
-.card:hover {
-  border: 2px solid var(--primary);
+  box-shadow: 0 0rem 0.5rem 0.3rem rgb(217 3 104 / 50%);
 }
 
 .card-img-top {
   height: 12rem;
   border: 1px solid var(--primary);
   border-radius: 1.5rem;
-  box-shadow: 0 0rem 0.5rem 0.3rem rgb(217 3 104 / 50%);
+  box-shadow: 0rem 0rem 0rem 0rem rgb(217 3 104 / 50%);
 }
 
 .card-text-top{
@@ -198,6 +194,12 @@ h1, h2, h3, p {
   left: 50%;
   transform: translate(-50%, -50%);
   cursor: pointer;
+}
+
+.card-fav {
+  position: absolute;
+  top: .5rem;
+  left: .5rem;
 }
 
 @media (max-width : 500px) {

@@ -13,7 +13,7 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet"
       integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD" crossorigin="anonymous">
     <link rel="stylesheet" href="styles.css">
-    <title>Home | Amazing Events</title>
+    <title>Favourites | Amazing Events</title>
   </head>
 
   <body>
@@ -47,9 +47,6 @@
                 <li class="nav-item">
                   <a class="btn btn-danger" href="./stats.html">Stats</a>
                 </li>
-                <li v-if="favourites.length" class="nav-item">
-                  <a class="btn btn-danger" href="./favourites.html">Favourites</a>
-                </li>
               </ul>
             </div>
           </div>
@@ -57,58 +54,34 @@
       </header>
       <section class="d-flex justify-content-between align-items-center bg-danger py-1 px-2 ">
         <a href="./stats.html" class="btn p-0 px-1 arrow-left"><span class="fs-2 text-white">➤</span></a>
-        <h1 class="text-white fs-2">Home</h1>
-        <a href="./upcoming-events.html" class="btn p-0 px-1"><span class="fs-2 text-white">➤</span></a>
+        <h1 class="text-white fs-2">Favourites</h1>
+        <a href="./index.html" class="btn p-0 px-1"><span class="fs-2 text-white">➤</span></a>
       </section>
       <section class="d-flex flex-column p-4 flex-grow-1">
-        <div class="d-flex flex-wrap px-3 gap-2">
-          <!-- CHECKBOXES -->
-          <div class="d-flex flex-wrap align-items-center justify-content-center gap-2 me-2" id="checkbox-container">
-            <div v-for="item of categories" class="checkbox-button">
-              <input type="checkbox" :id="`inlineCheckbox${item}`" :value=item v-model="categoriesSelected">
-              <label class="form-check-label" :for="`inlineCheckbox${item}`">{{item}}</label>
-            </div>
-          </div>
-          {{searchFilter}}
-          <form class="input-group d-flex flex-grow-1 w-25" id="search-form" @submit.prevent>
-            <input type="text" class="form-control" placeholder="Search Event..." v-model="word" id="search-input"
-              aria-describedby="search-button" aria-label="Search">
-            <button class="btn btn-outline-danger" type="submit">Search</button>
-          </form>
-        </div>
         <!-- CARDS -->
-        <div
-          class="row row-cols-1 row-cols-xl-5 row-cols-lg-4 row-cols-md-3 row-cols-sm-2 g-4 m-0 justify-content-center text-center"
-          id="card-container">
-          <div v-if="loading && !word" class="spinner-border text-danger" role="status">
-            <span class="visually-hidden">Loading...</span>
-          </div>
-          <p v-if="error" class="fs-1 text-danger" role="status">{{error}}</p>
-          <div v-if="word && !events.length" class="d-flex flex-column align-items-center gap-2 w-100">
-            <h2>No hay resultados para la busqueda : {{word}}</h2>
-            <button class="btn btn-outline-danger" type="button" id="back-button"
-              @click="this.word = ''">Volver</button>
-          </div>
-          <div v-for="event of events" class="d-flex col justify-content-center">
-            <div class="card bg-dark text-white p-2 justify-content-between">
-              <img :src=event.image class="card-img-top" :alt=`${event.name}`>
-              <span class="card-text-top bg-dark text-white fs-5 px-2 bold">{{event.date}}</span>
-              <button v-if="favourites.some(e => e.name === event.name)" @click="deleteFavourite(event)"
-                class="card-fav btn fs-3 p-0">❤️</button>
-              <button v-else @click="addFavourite(event)" class="card-fav btn fs-3 p-0">🤍</button>
-              <div class="d-flex justify-content-between align-items-end text-start mt-1 gap-2">
-                <div class="d-flex flex-column gap-2 w-100">
-                  <h3 class="card-title fs-4 m-0">{{event.name}}</h3>
-                  <a :href="`./event-details.html?id=${event._id}`" class="btn btn-danger">Details</a>
+        <div class="container text-white p-3">
+          <h2 v-if="!favourites.length" class="text-center text-dark">There is not Favourites currently.</h2>
+          <div class="d-flex justify-content-center align-items-center flex-wrap gap-3 text-black">
+            <div v-for="event of favourites" class="d-flex col justify-content-center">
+              <div class="card bg-dark text-white p-2 justify-content-between">
+                <img :src=event.image class="card-img-top" :alt=`${event.name}`>
+                <span class="card-text-top bg-dark text-white fs-5 px-2 bold">{{event.date}}</span>
+                <button v-if="favourites.some(e => e.name === event.name)" @click="deleteFavourite(event)"
+                  class="card-fav btn fs-3 p-0">❤️</button>
+                <button v-else @click="addFavourite(event)" class="card-fav btn fs-3 p-0">🤍</button>
+                <div class="d-flex justify-content-between align-items-end text-start mt-1 gap-2">
+                  <div class="d-flex flex-column gap-2 w-100">
+                    <h3 class="card-title fs-4 m-0">{{event.name}}</h3>
+                    <a :href="`./event-details.html?id=${event._id}`" class="btn btn-danger">Details</a>
+                  </div>
+                  <p
+                    class="d-flex flex-wrap flex-column justify-content-end align-items-center border border-light p-2 rounded">
+                    <strong class="fs-2">${{event.price}}</strong><small>/Person</small>
+                  </p>
                 </div>
-                <p
-                  class="d-flex flex-wrap flex-column justify-content-end align-items-center border border-light p-2 rounded">
-                  <strong class="fs-2">${{event.price}}</strong><small>/Person</small>
-                </p>
               </div>
             </div>
           </div>
-        </div>
       </section>
       <footer class="d-flex justify-content-between align-items-center bg-danger p-3">
         <nav class="d-flex gap-2">
