@@ -18,11 +18,17 @@ const app = createApp({
       error: '',
       highestAttendanceEvent: {},
       lowestAttendanceEvent: {},
-      highestCapacityEvent : {}
+      highestCapacityEvent: {},
+      pastEventStats: [],
+      upcomingEventStats: [],
+      id: 0,
+      eventDetails: []
     }
   },
   created() {
-    console.log(window.location.pathname)
+    let querySearch = window.location.search
+    this.id = new URLSearchParams(querySearch).get("id")
+
     if (window.location.pathname.includes('/past-events.html')) {
       this.typeEvents = 'past'
     } else if (window.location.pathname.includes('/upcoming-events.html')) {
@@ -42,6 +48,7 @@ const app = createApp({
           this.currentDate = data.currentDate
           this.pastEvents = this.data.filter(event => new Date(Date.parse(this.currentDate)) > new Date(Date.parse(event.date)))
           this.upcomingEvents = this.data.filter(event => new Date(Date.parse(this.currentDate)) < new Date(Date.parse(event.date)))
+          this.getDetails()
           if (this.typeEvents === 'past') {
             this.data = this.pastEvents
             this.events = this.pastEvents
@@ -90,6 +97,9 @@ const app = createApp({
         }
       })
     },
+    getDetails() {
+      this.eventDetails = this.data.find(event => event._id === Number(this.id))
+    }
   },
   computed:{
     searchFilter() {
@@ -107,10 +117,10 @@ const app = createApp({
         let percentage = (item.assistance * 100) / item.capacity
         if (highestAttendance < percentage) {
           highestAttendance = percentage
-          highestAttendanceEvent = item
+          highestAttendanceEvent = item.name
         }
       })
-      this.highestAttendanceEvent = {highestAttendance, highestAttendanceEvent}
+      this.highestAttendanceEvent = {total: highestAttendance, name: highestAttendanceEvent}
     },
     getLowestAttendanceEvent() {
       let lowestAttendance = 0
@@ -121,22 +131,66 @@ const app = createApp({
           lowestAttendance = percentage
         } else if (lowestAttendance >= percentage) {
           lowestAttendance = percentage
-          lowestAttendanceEvent = item
+          lowestAttendanceEvent = item.name
         }
       })
-      this.lowestAttendanceEvent = {lowestAttendance, lowestAttendanceEvent}
+      this.lowestAttendanceEvent = {total: lowestAttendance, name: lowestAttendanceEvent}
     },
-    getLargerCapacityEvent() {
+    getHighestCapacityEvent() {
       let highestCapacity = 0
       let highestCapacityEvent
       this.pastEvents.forEach(item => {
         let capacity = item.capacity
         if (highestCapacity < capacity) {
           highestCapacity = capacity
-          highestCapacityEvent = item
+          highestCapacityEvent = item.name
         }
       })
-      this.highestCapacityEvent = {highestCapacityEvent, highestCapacity}
-    }
+      this.highestCapacityEvent = {name: highestCapacityEvent, total: highestCapacity}
+    },
+    getPastEventsByCategories() {
+      let result = this.pastEvents.reduce((acc, item) => {
+        let category = item.category;
+        if (!acc[category]) {
+          acc[category] = {
+            categories: item.category,
+            price: item.price * item.assistance,
+            assistance: (item.assistance * 100) / item.capacity,
+            length
+          };
+        } else {
+          acc[category].price += item.price * item.assistance;
+          acc[category].assistance += (item.assistance * 100) / item.capacity;
+          acc[category].length ++;
+        }
+        return acc;
+      }, {});
+      Object.values(result).forEach(event => {
+        event.percentage = (event.assistance / (event.length + 1)).toFixed(2)
+      })
+      this.pastEventStats = Object.values(result)
+    },
+    getUpcomingEventsByCategories() {
+      let result = this.upcomingEvents.reduce((acc, item) => {
+        let category = item.category;
+        if (!acc[category]) {
+          acc[category] = {
+            categories: item.category,
+            price: item.price * item.estimate,
+            estimate: (item.estimate * 100) / item.capacity,
+            length
+          };
+        } else {
+          acc[category].price += item.price * item.estimate;
+          acc[category].estimate += (item.estimate * 100) / item.capacity;
+          acc[category].length ++;
+        }
+        return acc;
+      }, {});
+      Object.values(result).forEach(event => {
+        event.percentage = (event.estimate / (event.length + 1)).toFixed(2)
+      })
+      this.upcomingEventStats = Object.values(result)
+    },
   }
 }).mount('#App')
