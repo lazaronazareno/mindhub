@@ -18,56 +18,64 @@
 
   <body>
     <main class="d-flex flex-column vh-100" id="App">
-      <header
-        class="container-fluid bg-dark text-white d-flex flex-column flex-md-row justify-content-between align-items-center px-0 px-sm-2 py-1 border-bottom border-danger">
-        <a href="./index.html">
-          <img class="ratio ratio-21x9" style="width:15rem;" src="./assets/Logo_Amazing_Events.png"
-            alt="Amazing Events Logo">
-        </a>
-        <nav class="flex-grow-1">
-          <ul class="navbar-nav list-group list-group-horizontal justify-content-evenly flex-row flex-wrap gap-1">
-            <li class="nav-item">
-              <a class="btn btn-danger" href="./index.html">Home</a>
-            </li>
-            <li class="nav-item">
-              <a class="btn btn-danger" href="./upcoming-events.html">Upcoming Events</a>
-            </li>
-            <li class="nav-item">
-              <a class="btn btn-danger" href="./past-events.html">Past Events</a>
-            </li>
-            <li class="nav-item">
-              <a class="btn btn-danger" href="./contact.html">Contact</a>
-            </li>
-            <li class="nav-item">
-              <a class="btn btn-danger" href="./stats.html">Stats</a>
-            </li>
-          </ul>
+      <header class="bg-dark text-white border-bottom border-danger">
+        <nav class="navbar navbar-expand-md p-0 w-100">
+          <div class="container-fluid">
+            <a class="navbar-brand m-0" href="./index.html">
+              <img class="ratio ratio-21x9" src="./assets/Logo_Amazing_Events.png" alt="Amazing Events Logo">
+            </a>
+            <button class="navbar-toggler btn btn-danger" type="button" data-bs-toggle="collapse"
+              data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false"
+              aria-label="Toggle navigation">
+              <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse justify-content-evenly" id="navbarSupportedContent">
+              <ul
+                class="navbar-nav list-group list-group-horizontal justify-content-evenly flex-row flex-wrap gap-1 w-100">
+                <li class="nav-item">
+                  <a class="btn btn-danger" href="./index.html">Home</a>
+                </li>
+                <li class="nav-item">
+                  <a class="btn btn-danger" href="./upcoming-events.html">Upcoming Events</a>
+                </li>
+                <li class="nav-item">
+                  <a class="btn btn-danger" href="./past-events.html">Past Events</a>
+                </li>
+                <li class="nav-item">
+                  <a class="btn btn-danger" href="./contact.html">Contact</a>
+                </li>
+                <li class="nav-item">
+                  <a class="btn btn-danger" href="./stats.html">Stats</a>
+                </li>
+              </ul>
+            </div>
+          </div>
         </nav>
       </header>
       <section class="d-flex justify-content-between align-items-center bg-danger py-1 px-2 ">
-        <a href="./index.html" class="btn btn-danger p-0 px-1"><span class="fs-1">&larr;</span></a>
-        <h1 class="text-white">Upcoming Events</h1>
-        <a href="./past-events.html" class="btn btn-danger p-0 px-1"><span class="fs-1">&rarr;</span></a>
+        <a href="./index.html" class="btn p-0 px-1 arrow-left"><span class="fs-2 text-white">➤</span></a>
+        <h1 class="text-white fs-2">Upcoming Events</h1>
+        <a href="./past-events.html" class="btn p-0 px-1"><span class="fs-2 text-white">➤</span></a>
       </section>
-      <section class="d-flex flex-column py-4 flex-grow-1">
-        <div class="d-flex flex-wrap px-3">
+      <section class="d-flex flex-column p-4 flex-grow-1">
+        <div class="d-flex flex-wrap px-3 gap-2">
           <!-- CHECKBOXES -->
-          <div class="d-flex flex-wrap align-items-center gap-2 me-2" id="checkbox-container">
-            <div v-for="item of categories" class="form-check form-check-inline m-0">
-              <input class="form-check-input" type="checkbox" :id="`inlineCheckbox${item}`" :value=item
-                v-model="categoriesSelected">
+          <div class="d-flex flex-wrap align-items-center justify-content-center gap-2 me-2" id="checkbox-container">
+            <div v-for="item of categories" class="checkbox-button">
+              <input type="checkbox" :id="`inlineCheckbox${item}`" :value=item v-model="categoriesSelected">
               <label class="form-check-label" :for="`inlineCheckbox${item}`">{{item}}</label>
             </div>
           </div>
           {{searchFilter}}
           <form class="input-group d-flex flex-grow-1 w-25" id="search-form" @submit.prevent>
-            <input type="text" class="form-control" v-model="word" id="search-input" aria-describedby="search-button"
-              aria-label="Search">
+            <input type="text" class="form-control" placeholder="Search Event..." v-model="word" id="search-input"
+              aria-describedby="search-button" aria-label="Search">
             <button class="btn btn-outline-danger" type="submit">Search</button>
           </form>
         </div>
         <!-- CARDS -->
-        <div class="row row-cols-1 row-cols-lg-4 row-cols-md-2 g-4 m-0 justify-content-center text-center"
+        <div
+          class="row row-cols-1 row-cols-xl-5 row-cols-lg-4 row-cols-md-3 row-cols-sm-2 g-4 m-0 justify-content-center text-center"
           id="card-container">
           <div v-if="loading && !word" class="spinner-border text-danger" role="status">
             <span class="visually-hidden">Loading...</span>
@@ -79,15 +87,17 @@
               @click="this.word = ''">Volver</button>
           </div>
           <div v-for="event of events" class="d-flex col justify-content-center">
-            <div class="card bg-dark text-white p-3">
-              <img :src=event.image class="card-img-top rounded" alt="...">
-              <div class="card-body text-center p-0 py-3">
-                <h5 class="card-title">{{event.name}}</h5>
-                <h6 class="card-subtitle mb-2 text-white">{{event.description}}</h6>
+            <div class="card bg-dark text-white p-2 justify-content-between">
+              <img :src=event.image class="card-img-top" :alt=`${event.name}`>
+              <span class="card-text-top bg-dark text-white fs-5 px-2 bold">{{event.date}}</span>
+              <div class="d-flex justify-content-between align-items-center text-start mt-1">
+                <h3 class="card-title fs-4 m-0">{{event.name}}</h3>
+                <p class="d-flex flex-wrap justify-content-end align-items-center"><strong
+                    class="fs-2">${{event.price}}</strong><small>/Person</small></p>
               </div>
-              <div class="d-flex justify-content-between align-items-center p-2">
-                <span>Price ${{event.price}}</span>
-                <a :href="`./event-details.html?id=${event._id}`" class="btn btn-danger">View More...</a>
+              <div class="d-flex justify-content-between align-items-center py-1">
+                <span class="card-text fs-5 border border-danger rounded px-2">{{event.category}}</span>
+                <a :href="`./event-details.html?id=${event._id}`" class="btn btn-danger">Details</a>
               </div>
             </div>
           </div>

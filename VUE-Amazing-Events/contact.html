@@ -18,36 +18,44 @@
 
   <body>
     <main class="d-flex flex-column vh-100">
-      <header
-        class="container-fluid bg-dark text-white d-flex flex-column flex-md-row justify-content-between align-items-center px-0 px-sm-2 py-1 border-bottom border-danger">
-        <a href="./index.html">
-          <img class="ratio ratio-21x9" style="width:15rem;" src="./assets/Logo_Amazing_Events.png"
-            alt="Amazing Events Logo">
-        </a>
-        <nav class="flex-grow-1">
-          <ul class="navbar-nav list-group list-group-horizontal justify-content-evenly flex-row flex-wrap gap-1">
-            <li class="nav-item">
-              <a class="btn btn-danger" href="./index.html">Home</a>
-            </li>
-            <li class="nav-item">
-              <a class="btn btn-danger" href="./upcoming-events.html">Upcoming Events</a>
-            </li>
-            <li class="nav-item">
-              <a class="btn btn-danger" href="./past-events.html">Past Events</a>
-            </li>
-            <li class="nav-item">
-              <a class="btn btn-danger" href="./contact.html">Contact</a>
-            </li>
-            <li class="nav-item">
-              <a class="btn btn-danger" href="./stats.html">Stats</a>
-            </li>
-          </ul>
+      <header class="bg-dark text-white border-bottom border-danger">
+        <nav class="navbar navbar-expand-md p-0 w-100">
+          <div class="container-fluid">
+            <a class="navbar-brand m-0" href="./index.html">
+              <img class="ratio ratio-21x9" src="./assets/Logo_Amazing_Events.png" alt="Amazing Events Logo">
+            </a>
+            <button class="navbar-toggler btn btn-danger" type="button" data-bs-toggle="collapse"
+              data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false"
+              aria-label="Toggle navigation">
+              <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse justify-content-evenly" id="navbarSupportedContent">
+              <ul
+                class="navbar-nav list-group list-group-horizontal justify-content-evenly flex-row flex-wrap gap-1 w-100">
+                <li class="nav-item">
+                  <a class="btn btn-danger" href="./index.html">Home</a>
+                </li>
+                <li class="nav-item">
+                  <a class="btn btn-danger" href="./upcoming-events.html">Upcoming Events</a>
+                </li>
+                <li class="nav-item">
+                  <a class="btn btn-danger" href="./past-events.html">Past Events</a>
+                </li>
+                <li class="nav-item">
+                  <a class="btn btn-danger" href="./contact.html">Contact</a>
+                </li>
+                <li class="nav-item">
+                  <a class="btn btn-danger" href="./stats.html">Stats</a>
+                </li>
+              </ul>
+            </div>
+          </div>
         </nav>
       </header>
       <section class="d-flex justify-content-between align-items-center bg-danger py-1 px-2 ">
-        <a href="./past-events.html" class="btn btn-danger p-0 px-1"><span class="fs-1">&larr;</span></a>
-        <h1 class="text-white">Contact us</h1>
-        <a href="./stats.html" class="btn btn-danger p-0 px-1"><span class="fs-1">&rarr;</span></a>
+        <a href="./past-events.html" class="btn p-0 px-1 arrow-left"><span class="fs-2 text-white">➤</span></a>
+        <h1 class="text-white fs-2">Contact us</h1>
+        <a href="./stats.html" class="btn p-0 px-1"><span class="fs-2 text-white">➤</span></a>
       </section>
       <div class="d-flex flex-column py-4 flex-grow-1">
         <form class="d-flex flex-column align-items-center container-sm gap-1">
