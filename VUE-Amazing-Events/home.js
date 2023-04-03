@@ -110,15 +110,10 @@ const app = createApp({
       this.eventDetails = this.data.find(event => event._id === Number(this.id))
     },
     handleFormSubmit() {
-      console.log(this.formValues)
       this.formSubmitted = true
       setTimeout(() => this.formSubmitted = false, 2000)
     },
     addFavourite(event) {
-      console.log(event)
-      console.log(this.eventDetails)
-      console.log(this.favourites)
-      console.log(!this.favourites.some(e => e.name === event.name))
       if(!this.favourites.some(e => e.name === event.name)){
         this.favourites.push(event)
         localStorage.setItem('favs',JSON.stringify(this.favourites))

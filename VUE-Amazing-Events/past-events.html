@@ -47,6 +47,7 @@
                 <li class="nav-item">
                   <a class="btn btn-danger" href="./stats.html">Stats</a>
                 </li>
+                <!-- IF FAVOURITES -->
                 <li v-if="favourites.length" class="nav-item">
                   <a class="btn btn-danger" href="./favourites.html">Favourites</a>
                 </li>
@@ -70,11 +71,17 @@
             </div>
           </div>
           {{searchFilter}}
+          <!-- SEARCH FORM -->
           <form class="input-group d-flex flex-grow-1 w-25" id="search-form" @submit.prevent>
             <input type="text" class="form-control" placeholder="Search Event..." v-model="word" id="search-input"
               aria-describedby="search-button" aria-label="Search">
             <button class="btn btn-outline-danger" type="submit">Search</button>
           </form>
+          <div v-if="word && !events.length" class="d-flex flex-column align-items-center gap-2 w-100">
+            <h2>No hay resultados para la busqueda : {{word}}</h2>
+            <button class="btn btn-outline-danger" type="button" id="back-button"
+              @click="this.word = ''">Volver</button>
+          </div>
         </div>
         <!-- CARDS -->
         <div
@@ -84,11 +91,6 @@
             <span class="visually-hidden">Loading...</span>
           </div>
           <p v-if="error" class="fs-1 text-danger" role="status">{{error}}</p>
-          <div v-if="word && !events.length" class="d-flex flex-column align-items-center gap-2 w-100">
-            <h2>No hay resultados para la busqueda : {{word}}</h2>
-            <button class="btn btn-outline-danger" type="button" id="back-button"
-              @click="this.word = ''">Volver</button>
-          </div>
           <div v-for="event of events" class="d-flex col justify-content-center">
             <div class="card bg-dark text-white p-2 justify-content-between">
               <img :src=event.image class="card-img-top" :alt=`${event.name}`>
