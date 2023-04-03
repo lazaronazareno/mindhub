@@ -1,14 +1,52 @@
+let cardContainer = document.getElementById("card-container")
+
+let data 
+let apiUrl = 'https://mindhub-xj03.onrender.com/api/amazing'
+let jsonUrl = './data.json'
+
+async function getData() {
+  try {
+    const response = await fetch(apiUrl);
+    if (!response.ok) {
+      throw new Error('Request failed');
+    }
+    data = await response.json();
+    getPastEvents()
+    paintCardCointainer(pastEvents)
+    addCategories()
+    return data;
+  } catch (error) {
+    console.error(error);
+    try {
+      const response = await fetch(jsonUrl);
+      if (!response.ok) {
+        throw new Error('Request failed');
+      }
+      data = await response.json();
+      getPastEvents()
+      paintCardCointainer(pastEvents)
+      addCategories()
+      return data;
+    } catch {
+      console.error(error);
+    }
+  }
+}
+getData()
+
 const pastEvents = []
 
-for (const event of data.events) {
-  if (new Date(Date.parse(data.currentDate)) > new Date(Date.parse(event.date))) {
-    pastEvents.push(event)
+function getPastEvents() {
+  for (const event of data.events) {
+    if (new Date(Date.parse(data.currentDate)) > new Date(Date.parse(event.date))) {
+      pastEvents.push(event)
+    }
   }
 }
 
+
 function paintCardCointainer(events) {
   let template = ""
-  let cardContainer = document.getElementById("card-container")
 
   for( const event of events){
     template += `
@@ -29,8 +67,6 @@ function paintCardCointainer(events) {
   }
   cardContainer.innerHTML = template
 }
-
-paintCardCointainer(pastEvents)
 
 function addCategories() {
   let categories = []
@@ -60,8 +96,6 @@ function addCategories() {
   checkboxContainer.innerHTML = template
 }
 
-addCategories()
-
 function searchByCategories(category) {
   let results = []
   if (category !== '')  {
@@ -88,21 +122,22 @@ checkbox.addEventListener('change', (e) => {
 })
 
 // -------------------- SEARCH --------------------
-function search(word) {
+function search(word, data) {
   let results = []
-  results = pastEvents.filter((item) => {
-    return item.name.toLowerCase().includes(word);
+  results = data.filter((item) => {
+    return item.name.toLowerCase().includes(word.toLowerCase());
   })  
 
   return results
 }
 
-let searchButton = document.getElementById("search-form")
+let searchForm = document.getElementById("search-form")
+let searchInput = document.getElementById("search-input")
 
-searchButton.addEventListener('submit', (e) => {
+searchForm.addEventListener('submit', (e) => {
   e.preventDefault()
 
-  let results = search(e.target[0].value)
+  let results = categoriesCheckbox.length > 0 ? search(e.target[0].value, categoriesCheckbox) : search(e.target[0].value, pastEvents)
 
   if (results.length === 0) {
     let notResults = `
@@ -111,12 +146,35 @@ searchButton.addEventListener('submit', (e) => {
       <button class="btn btn-outline-danger" type="button" id="back-button">Volver</button>
     </div>
     `
+    searchForm[0].value = ''
+    cardContainer.innerHTML = notResults
+    
+    let backButton = document.getElementById("back-button")
+    
+    backButton.addEventListener('click', () => {
+      paintCardCointainer(pastEvents)
+    })
+  } else {
+    searchForm[0].value = ''
+    paintCardCointainer(results)
+  }
+})
+
+searchInput.addEventListener('input', (e) => {
+  let results = categoriesCheckbox.length > 0 ? search(e.target.value, categoriesCheckbox) : search(e.target.value, pastEvents)
+
+  if (results.length === 0) {
+    let notResults = `
+    <div class="d-flex flex-column align-items-center gap-2 w-100">
+      <h2>No hay resultados para la busqueda : ${e.target.value}</h2>
+      <button class="btn btn-outline-danger" type="button" id="back-button">Volver</button>
+    </div>
+    `
     cardContainer.innerHTML = notResults
   
     let backButton = document.getElementById("back-button")
   
     backButton.addEventListener('click', () => {
-      searchButton[0].value = ''
       paintCardCointainer(pastEvents)
     })
   } else {

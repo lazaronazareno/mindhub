@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+
+  <head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://cdn.jsdelivr.net/npm/vue@3"></script>
+    <title>Document</title>
+  </head>
+
+  <body>
+    <div id="app" template>
+      <p>{{ message }}</p>
+      <div v-if="loading">
+        Loading...
+      </div>
+      <div v-else>
+        <h1>{{ character.name }}</h1>
+        <p>Altura: {{ character.height }}</p>
+        <p>Peso: {{ character.mass }}</p>
+      </div>
+    </div>
+
+    <script type="module" src="./index.js"></script>
+  </body>
+
+</html>

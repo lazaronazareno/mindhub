@@ -9,16 +9,24 @@
   --background-light: #ffffff;
   --background-dark: #333333;
 }
-
-body {
+* {
   margin: 0;
   padding: 0;
+  box-sizing: border-box;
+}
+
+body {
   min-height: 100vh;
   font-family: 'Roboto', sans-serif;
 }
 
 h1, h2, h3, p {
   margin: 0;
+}
+
+.spinner-border:not(table .spinner-border) {
+  width: 4em;
+  height: 4em;
 }
 
 .bg-white {
@@ -71,15 +79,23 @@ h1, h2, h3, p {
 
 #card-container .card {
   box-shadow: -0.5rem 0.5rem 0.5rem 0.2rem rgb(73 80 87 / 70%);
+}
+
+#card-container .card, #details .card {
   min-height: 25rem;
   max-width: 20rem;
+}
+
+#details .card {
+  max-width: 25rem;
+  border: 5px solid var(--primary);
 }
 
 .card a {
   box-shadow: -0.5rem 0.5rem 0.5rem 0.1rem rgb(217 3 104 / 50%);
 }
 
-.card a:hover, .card:hover {
+.card a:hover, #card-container .card:hover {
   transition: 0.2s;
   box-shadow: 0rem 0rem 0rem 0rem rgb(217 3 104 / 50%);
 }
@@ -94,7 +110,7 @@ h1, h2, h3, p {
 }
 
 .card:hover {
-  border: 1px solid var(--primary);
+  border: 5px solid var(--primary);
 }
 
 .card-img-top {
@@ -112,9 +128,11 @@ h1, h2, h3, p {
   color: var(--primary);
 }
 
-/* #details img {
-  box-shadow: -0.5rem -0.5rem 3rem .5rem rgb(217 3 104 / 50%);
-} */
+#details img {
+  min-width: 100%;
+  object-fit: cover;
+  aspect-ratio: 2/1;
+}
 
 @media (max-width : 786px) {
   header nav {
