@@ -1,0 +1,219 @@
+<!DOCTYPE html>
+<html lang="en">
+
+  <head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="shortcut icon" href="./assets/Logo.png" type="image/x-icon">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,400;0,500;0,700;1,400;1,700&display=swap"
+      rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet"
+      integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD" crossorigin="anonymous">
+    <link rel="stylesheet" href="styles.css">
+    <title>Stats | Amazing Events</title>
+  </head>
+
+  <body>
+    <main class="d-flex flex-column vh-100" id="App">
+      <header class="bg-dark text-white border-bottom border-danger">
+        <nav class="navbar navbar-expand-md p-0 w-100">
+          <div class="container-fluid">
+            <a class="navbar-brand m-0" href="./index.html">
+              <img class="ratio ratio-21x9" src="./assets/Logo_Amazing_Events.png" alt="Amazing Events Logo">
+            </a>
+            <button class="navbar-toggler btn btn-danger" type="button" data-bs-toggle="collapse"
+              data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false"
+              aria-label="Toggle navigation">
+              <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse pb-1" id="navbarSupportedContent">
+              <ul
+                class="navbar-nav list-group list-group-horizontal justify-content-evenly flex-row flex-wrap gap-1 w-100">
+                <li class="nav-item">
+                  <a class="btn btn-danger" href="./index.html">Home</a>
+                </li>
+                <li class="nav-item">
+                  <a class="btn btn-danger" href="./upcoming-events.html">Upcoming Events</a>
+                </li>
+                <li class="nav-item">
+                  <a class="btn btn-danger" href="./past-events.html">Past Events</a>
+                </li>
+                <li class="nav-item">
+                  <a class="btn btn-danger" href="./contact.html">Contact</a>
+                </li>
+                <li class="nav-item">
+                  <a class="btn btn-danger" href="./stats.html">Stats</a>
+                </li>
+                <li v-if="favourites.length" class="nav-item">
+                  <a class="btn btn-danger" href="./favourites.html">Favourites</a>
+                </li>
+              </ul>
+            </div>
+          </div>
+        </nav>
+      </header>
+      <section class="d-flex justify-content-between align-items-center bg-danger py-1 px-2 ">
+        <a href="./contact.html" class="btn p-0 px-1 arrow-left"><span class="fs-2 text-white">➤</span></a>
+        <h1 class="text-white">Stats</h1>
+        <a :href="favourites.length ? './favourites.html' : './index.html'" class="btn p-0 px-1"><span
+            class="fs-2 text-white">➤</span></a>
+      </section>
+      <div class="d-flex flex-column p-4 flex-grow-1">
+        <table class="table table-bordered m-0">
+          <thead class="table-danger">
+            <tr>
+              <th colspan="3" scope="col">Events statistics</th>
+            </tr>
+          </thead>
+          <tbody class="table-group-divider">
+            <tr class="table-secondary">
+              <th class="w-25">Event with highest percentage of attendance</th>
+              <td class="w-25">Event with the lowest percentage of attendance</td>
+              <td class="w-25">Event with larger capacity</td>
+            </tr>
+            <tr>
+              {{getHighestAttendanceEvent}}
+              <th id="highestPercentage">
+                <div v-if="highestAttendanceEvent.total">
+                  {{highestAttendanceEvent.name}} - {{highestAttendanceEvent.total}}
+                </div>
+                <div v-else class="spinner-border text-danger" role="status">
+                  <span class="visually-hidden">Loading...</span>
+                </div>
+              </th>
+              {{getLowestAttendanceEvent}}
+              <td id="lowestPercentage">
+                <div v-if="lowestAttendanceEvent.total">
+                  {{lowestAttendanceEvent.name}} - {{lowestAttendanceEvent.total}}
+                </div>
+                <div v-else class="spinner-border text-danger" role="status">
+                  <span class="visually-hidden">Loading...</span>
+                </div>
+              </td>
+              {{getHighestCapacityEvent}}
+              <td id="largerCapacity">
+                <div v-if="highestCapacityEvent.total">
+                  {{highestCapacityEvent.name}} - {{highestCapacityEvent.total}}
+                </div>
+                <div v-else class="spinner-border text-danger" role="status">
+                  <span class="visually-hidden">Loading...</span>
+                </div>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+        <table class="table table-bordered m-0">
+          <thead class="table-danger">
+            <tr>
+              <th scope="col" colspan="3">Upcoming Events statistics by category</th>
+            </tr>
+          </thead>
+          <tbody class="table-group-divider" id="upcoming-events-category">
+            <!---------------- UPCOMING EVENTS TABLE ---------------->
+            <tr class="table-secondary">
+              <td class="w-25">Categories</td>
+              <td class="w-25">Revenues</td>
+              <td class="w-25">Percentage of attendance</td>
+            </tr>
+            {{getUpcomingEventsByCategories}}
+            <template v-if="upcomingEventStats && upcomingEventStats.length">
+              <tr v-for="event of upcomingEventStats">
+                <td>{{event.categories}}</td>
+                <td>${{event.price}}</td>
+                <td>{{event.percentage}}%</td>
+              </tr>
+            </template>
+            <template v-else>
+              <tr>
+                <th>
+                  <div class="spinner-border text-danger" role="status">
+                    <span class="visually-hidden">Loading...</span>
+                  </div>
+                </th>
+                <td>
+                  <div class="spinner-border text-danger" role="status">
+                    <span class="visually-hidden">Loading...</span>
+                  </div>
+                </td>
+                <td>
+                  <div class="spinner-border text-danger" role="status">
+                    <span class="visually-hidden">Loading...</span>
+                  </div>
+                </td>
+              </tr>
+            </template>
+          </tbody>
+        </table>
+        <table class="table table-bordered m-0">
+          <thead class="table-danger">
+            <tr>
+              <th scope="col" colspan="3">Past Events statistics by category</th>
+            </tr>
+          </thead>
+          <tbody class="table-group-divider" id="past-events-category">
+            <!---------------- PAST EVENTS TABLE ---------------->
+            <tr class="table-secondary">
+              <td class="w-25">Categories</td>
+              <td class="w-25">Revenues</td>
+              <td class="w-25">Percentage of attendance</td>
+            </tr>
+            {{getPastEventsByCategories}}
+            <template v-if="pastEventStats && pastEventStats.length">
+              <tr v-for="event of pastEventStats">
+                <td>{{event.categories}}</td>
+                <td>${{event.price}}</td>
+                <td>{{event.percentage}}%</td>
+              </tr>
+            </template>
+            <template v-else>
+              <tr>
+                <th>
+                  <div class="spinner-border text-danger" role="status">
+                    <span class="visually-hidden">Loading...</span>
+                  </div>
+                </th>
+                <td>
+                  <div class="spinner-border text-danger" role="status">
+                    <span class="visually-hidden">Loading...</span>
+                  </div>
+                </td>
+                <td>
+                  <div class="spinner-border text-danger" role="status">
+                    <span class="visually-hidden">Loading...</span>
+                  </div>
+                </td>
+              </tr>
+            </template>
+          </tbody>
+        </table>
+      </div>
+      <footer class="d-flex justify-content-between align-items-center bg-danger p-3">
+        <nav class="d-flex gap-2">
+          <a href="http://instagram.com" target="_blank" rel="noopener noreferrer" style="width: 3rem; height: 3rem;"
+            class="d-flex bg-dark rounded-circle justify-content-center align-items-center">
+            <img style="width: 2rem;" src="./assets/instagram.png" alt="instagram">
+          </a>
+          <a href="http://facebook.com" target="_blank" rel="noopener noreferrer" style="width: 3rem; height: 3rem;"
+            class="d-flex bg-dark rounded-circle justify-content-center align-items-center">
+            <img style="width: 2rem;" src="./assets/facebook.png" alt="facebook">
+          </a>
+          <a href="http://whatsapp.com" target="_blank" rel="noopener noreferrer" style="width: 3rem; height: 3rem;"
+            class="d-flex bg-dark rounded-circle justify-content-center align-items-center">
+            <img style="width: 2rem;" src="./assets/whatsapp.png" alt="whatsapp">
+          </a>
+        </nav>
+        <h3 class="text-white">FE-13</h3>
+      </footer>
+    </main>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"
+      integrity="sha384-w76AqPfDkMBDXo30jS1Sgez6pr3x5MlQ1ZAGC+nuZB+EYdgRZgiwxhTBTkF7CXvN"
+      crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/vue@3"></script>
+    <script src="./home.js"></script>
+  </body>
+
+</html>

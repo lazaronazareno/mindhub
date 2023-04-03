@@ -1,0 +1,209 @@
+:root {
+  --primary: #d90368;
+  --primary-dark: #b70452;
+  --secondary: #714d9f;
+  --secondary-dark: #2a0054;
+  --tertiary: #006874;
+  --tertiary-dark: #001f24;
+  --error: #ba1a1a;
+  --background-light: #ffffff;
+  --background-dark: #333333;
+}
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  min-height: 100vh;
+  font-family: 'Roboto', sans-serif;
+}
+
+h1, h2, h3, p {
+  margin: 0;
+}
+
+.spinner-border:not(table .spinner-border) {
+  width: 4em;
+  height: 4em;
+}
+
+.navbar-brand img{
+  width: 15rem;
+}
+
+.arrow-left {
+  transform: rotate(180deg);
+}
+
+.bg-white {
+  background-color: var(--background-light)!important;
+}
+
+.bg-dark {
+  background-color: var(--background-dark)!important;
+}
+
+.bg-secondary {
+  background-color: var(--secondary)!important;
+}
+
+.bg-danger {
+  background-color: var(--primary)!important;
+}
+
+.btn-danger {
+  /* background-color: var(--primary)!important;
+  border-color: var(--primary)!important; */
+  background: rgb(217,74,141)!important;
+  background: -moz-linear-gradient(45deg, rgba(217,74,141,1) 0%, rgba(217,3,104,1) 50%, rgba(183,4,82,1) 100%)!important;
+  background: -webkit-linear-gradient(45deg, rgba(217,74,141,1) 0%, rgba(217,3,104,1) 50%, rgba(183,4,82,1) 100%)!important;
+  background: linear-gradient(45deg, rgba(217,74,141,1) 0%, rgba(217,3,104,1) 50%, rgba(183,4,82,1) 100%)!important;
+  filter: progid:DXImageTransform.Microsoft.gradient(startColorstr="#d94a8d",endColorstr="#b70452",GradientType=1)!important;
+}
+
+.btn-outline-danger {
+  border-color: var(--primary)!important;
+}
+
+.btn-danger:hover {
+  background-color: var(--primary-dark)!important;
+  border: 1px solid var(--background-light)!important;
+}
+
+.btn-outline-danger:hover {
+  background-color: var(--primary)!important;
+  border-color: var(--primary)!important;
+}
+
+.border-danger {
+  border-color: var(--primary)!important;
+}
+
+.form-check-input:checked {
+  background-color: var(--primary)!important;
+  border-color: var(--primary)!important;
+}
+
+.form-check-input:focus {
+  box-shadow: 0 0 0 1px #fff, 0 0 0 0.2rem var(--primary)
+}
+
+#card-container .card {
+  box-shadow: -0.5rem 0.5rem 0.5rem 0.2rem rgb(73 80 87 / 70%);
+}
+
+#card-container .card, #details .card {
+  border-radius: 1.5rem;
+  width: 19.5rem;
+  min-height: 18rem;
+}
+
+.card a:hover, #card-container .card:hover {
+  transition: 0.2s;
+  box-shadow: 0rem 0rem 0rem 0rem rgb(217 3 104 / 50%);
+}
+
+.card a:hover {
+  border: 1px solid var(--background-light)!important;
+}
+
+.card:hover img {
+  transition: 0.2s;
+  box-shadow: 0 0rem 0.5rem 0.3rem rgb(217 3 104 / 50%);
+}
+
+.card-img-top {
+  height: 12rem;
+  border: 1px solid var(--primary);
+  border-radius: 1.5rem;
+  box-shadow: 0rem 0rem 0rem 0rem rgb(217 3 104 / 50%);
+}
+
+.card-text-top{
+  position: absolute;
+  top: 1rem;
+  right: 1rem;
+  background-color: white;
+  border-radius: 1.5rem;
+}
+
+.form-control:focus {
+  border-color: var(--primary)!important;
+  box-shadow: none;
+}
+
+.form-floating>.form-control:focus~label {
+  color: var(--primary);
+}
+
+#details .card {
+  width: auto;
+  max-width: 25rem;
+  border: 5px solid var(--primary);
+  min-width: 20rem;
+  min-height: 21rem;
+}
+
+#details img {
+  min-width: 100%;
+  object-fit: cover;
+  height: 20rem;
+}
+
+#details .card-date {
+  position: absolute;
+  border-radius: 1.5rem;
+  bottom: -1rem;
+  left: 50%;
+  transform: translate(-50%, 0);
+}
+
+.checkbox-button {
+  display: flex;
+  position: relative;
+  cursor: pointer;
+}
+
+.checkbox-button input {
+  appearance: none;
+  width: 4.5rem;
+  height: 2rem;
+  -webkit-appearance: none;
+  border-radius: 1.5rem;
+  border: 3px solid #FFF;
+  background: var(--background-light);
+  outline: 1px solid var(--primary-dark);
+  cursor: pointer;
+}
+
+.checkbox-button input:checked {
+  background: var(--primary);
+  color: white;
+}
+
+.checkbox-button input:checked ~ label {
+  background: var(--primary);
+  color: white;
+}
+
+.checkbox-button label {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  cursor: pointer;
+}
+
+.card-fav {
+  position: absolute;
+  top: .5rem;
+  left: .5rem;
+}
+
+@media (max-width : 500px) {
+  .navbar-brand img{
+    width: 12rem;
+  }
+}
